@@ -450,7 +450,7 @@ class NBIInlineCompletionProvider
   }
 
   get name(): string {
-    return 'Notebook Intelligence';
+    return 'Snuhub Intelligence';
   }
 
   get identifier(): string {
@@ -477,7 +477,7 @@ class TelemetryEmitter implements ITelemetryEmitter {
 
     if (listenerName !== BACKEND_TELEMETRY_LISTENER_NAME) {
       console.warn(
-        `Notebook Intelligence telemetry listener '${listenerName}' registered. Make sure it is from a trusted source.`
+        `Snuhub Intelligence telemetry listener '${listenerName}' registered. Make sure it is from a trusted source.`
       );
     }
 
@@ -490,7 +490,7 @@ class TelemetryEmitter implements ITelemetryEmitter {
 
     if (listenerAlreadyExists) {
       console.error(
-        `Notebook Intelligence telemetry listener '${listenerName}' already exists!`
+        `Snuhub Intelligence telemetry listener '${listenerName}' already exists!`
       );
       return;
     }
@@ -516,7 +516,7 @@ class TelemetryEmitter implements ITelemetryEmitter {
  */
 const plugin: JupyterFrontEndPlugin<ISnuhubIntelligence> = {
   id: '@snuhub-intelligence/snuhub-intelligence:plugin',
-  description: 'Notebook Intelligence',
+  description: 'Snuhub Intelligence',
   autoStart: true,
   requires: [
     ICompletionProviderManager,
@@ -621,7 +621,7 @@ const plugin: JupyterFrontEndPlugin<ISnuhubIntelligence> = {
 
     const panel = new Panel();
     panel.id = 'snuhub-intelligence-tab';
-    panel.title.caption = 'Notebook Intelligence';
+    panel.title.caption = 'Snuhub Intelligence';
     const sidebarIcon = new LabIcon({
       name: 'ui-components:palette',
       svgstr: sparklesSvgstr
@@ -1115,7 +1115,7 @@ const plugin: JupyterFrontEndPlugin<ISnuhubIntelligence> = {
     });
 
     app.commands.addCommand(CommandIDs.openConfigurationDialog, {
-      label: 'Notebook Intelligence Settings',
+      label: 'Snuhub Intelligence Settings',
       execute: args => {
         let dialog: Dialog<unknown> | null = null;
         const dialogBody = new ConfigurationDialogBody({
@@ -1125,7 +1125,7 @@ const plugin: JupyterFrontEndPlugin<ISnuhubIntelligence> = {
           }
         });
         dialog = new Dialog({
-          title: 'Notebook Intelligence Settings',
+          title: 'Snuhub Intelligence Settings',
           hasClose: true,
           body: dialogBody,
           buttons: []
@@ -1138,7 +1138,7 @@ const plugin: JupyterFrontEndPlugin<ISnuhubIntelligence> = {
 
     palette.addItem({
       command: CommandIDs.openConfigurationDialog,
-      category: 'Notebook Intelligence'
+      category: 'Snuhub Intelligence'
     });
 
     mainMenu.settingsMenu.addGroup([
@@ -1599,7 +1599,7 @@ const plugin: JupyterFrontEndPlugin<ISnuhubIntelligence> = {
 
     const copilotContextMenu = new Menu({ commands: copilotMenuCommands });
     copilotContextMenu.id = 'snuhub-intelligence:editor-context-menu';
-    copilotContextMenu.title.label = 'Notebook Intelligence';
+    copilotContextMenu.title.label = 'Snuhub Intelligence';
     copilotContextMenu.title.icon = sidebarIcon;
     copilotContextMenu.addItem({ command: CommandIDs.editorGenerateCode });
     copilotContextMenu.addItem({ command: CommandIDs.editorExplainThisCode });

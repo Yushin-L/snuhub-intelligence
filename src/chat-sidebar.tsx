@@ -1685,10 +1685,11 @@ function SidebarComponent(props: any) {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
-        <div className="sidebar-title">Notebook Intelligence</div>
+        <div className="sidebar-title">Snuhub Intelligence</div>
         <div
           className="user-input-footer-button"
           onClick={() => handleSettingsButtonClick()}
+          style={{ display: 'none' }}
         >
           <VscSettingsGear />
         </div>
@@ -1765,7 +1766,7 @@ function SidebarComponent(props: any) {
             rows={3}
             onChange={onPromptChange}
             onKeyDown={onPromptKeyDown}
-            placeholder="Ask Notebook Intelligence..."
+            placeholder="Ask Snuhub Intelligence..."
             spellCheck={false}
             value={prompt}
           />
@@ -2219,7 +2220,7 @@ function InlinePromptComponent(props: any) {
         rows={3}
         onChange={onPromptChange}
         onKeyDown={onPromptKeyDown}
-        placeholder="Ask Notebook Intelligence to generate Python code..."
+        placeholder="Ask Snuhub Intelligence to generate Python code..."
         spellCheck={false}
         value={prompt}
       />
@@ -2354,7 +2355,7 @@ function GitHubCopilotLoginDialogBodyComponent(props: any) {
           </div>
           <div>
             <h4>Privacy and terms</h4>
-            By using Notebook Intelligence with GitHub Copilot subscription you
+            By using Snuhub Intelligence with GitHub Copilot subscription you
             agree to{' '}
             <a
               href="https://docs.github.com/en/copilot/responsible-use-of-github-copilot-features/responsible-use-of-github-copilot-chat-in-your-ide"
