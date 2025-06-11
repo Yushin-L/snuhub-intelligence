@@ -6,16 +6,16 @@ import os
 import sys
 from typing import Dict
 import logging
-from notebook_intelligence import github_copilot
-from notebook_intelligence.api import ButtonData, ChatModel, EmbeddingModel, InlineCompletionModel, LLMProvider, ChatParticipant, ChatRequest, ChatResponse, CompletionContext, ContextRequest, Host, CompletionContextProvider, MCPServer, MarkdownData, NotebookIntelligenceExtension, TelemetryEvent, TelemetryListener, Tool, Toolset
-from notebook_intelligence.base_chat_participant import BaseChatParticipant
-from notebook_intelligence.config import NBIConfig
-from notebook_intelligence.github_copilot_chat_participant import GithubCopilotChatParticipant
-from notebook_intelligence.llm_providers.github_copilot_llm_provider import GitHubCopilotLLMProvider
-from notebook_intelligence.llm_providers.litellm_compatible_llm_provider import LiteLLMCompatibleLLMProvider
-from notebook_intelligence.llm_providers.ollama_llm_provider import OllamaLLMProvider
-from notebook_intelligence.llm_providers.openai_compatible_llm_provider import OpenAICompatibleLLMProvider
-from notebook_intelligence.mcp_manager import MCPManager
+from snuhub_intelligence import github_copilot
+from snuhub_intelligence.api import ButtonData, ChatModel, EmbeddingModel, InlineCompletionModel, LLMProvider, ChatParticipant, ChatRequest, ChatResponse, CompletionContext, ContextRequest, Host, CompletionContextProvider, MCPServer, MarkdownData, SnuhubIntelligenceExtension, TelemetryEvent, TelemetryListener, Tool, Toolset
+from snuhub_intelligence.base_chat_participant import BaseChatParticipant
+from snuhub_intelligence.config import NBIConfig
+from snuhub_intelligence.github_copilot_chat_participant import GithubCopilotChatParticipant
+from snuhub_intelligence.llm_providers.github_copilot_llm_provider import GitHubCopilotLLMProvider
+from snuhub_intelligence.llm_providers.litellm_compatible_llm_provider import LiteLLMCompatibleLLMProvider
+from snuhub_intelligence.llm_providers.ollama_llm_provider import OllamaLLMProvider
+from snuhub_intelligence.llm_providers.openai_compatible_llm_provider import OpenAICompatibleLLMProvider
+from snuhub_intelligence.mcp_manager import MCPManager
 
 log = logging.getLogger(__name__)
 
@@ -118,14 +118,14 @@ class AIServiceManager(Host):
             except Exception as e:
                 log.error(f"Failed to load NBI extension from '{extension_dir}'!\n{e}")
     
-    def load_extension(self, extension_class: str) -> NotebookIntelligenceExtension:
+    def load_extension(self, extension_class: str) -> SnuhubIntelligenceExtension:
         import importlib
         try:
             parts = extension_class.split(".")
             module_name = ".".join(parts[0:-1])
             class_name = parts[-1]
             ExtensionClass = getattr(importlib.import_module(module_name), class_name)
-            if ExtensionClass is not None and issubclass(ExtensionClass, NotebookIntelligenceExtension):
+            if ExtensionClass is not None and issubclass(ExtensionClass, SnuhubIntelligenceExtension):
                 instance = ExtensionClass()
                 return instance
         except Exception as e:
@@ -159,9 +159,9 @@ class AIServiceManager(Host):
 
     def register_telemetry_listener(self, listener: TelemetryListener) -> None:
         if listener.name in self.telemetry_listeners:
-            log.error(f"Notebook Intelligence telemetry listener '{listener.name}' already exists!")
+            log.error(f"Snuhub Intelligence telemetry listener '{listener.name}' already exists!")
             return
-        log.warning(f"Notebook Intelligence telemetry listener '{listener.name}' registered. Make sure it is from a trusted source.")
+        log.warning(f"Snuhub Intelligence telemetry listener '{listener.name}' registered. Make sure it is from a trusted source.")
         self.telemetry_listeners[listener.name] = listener
 
     def register_toolset(self, toolset: Toolset) -> None:
@@ -284,7 +284,7 @@ class AIServiceManager(Host):
     async def handle_chat_request(self, request: ChatRequest, response: ChatResponse, options: dict = {}) -> None:
         if self.chat_model is None:
             response.stream(MarkdownData("Chat model is not set!"))
-            response.stream(ButtonData("Configure", "notebook-intelligence:open-configuration-dialog"))
+            response.stream(ButtonData("Configure", "snuhub-intelligence:open-configuration-dialog"))
             response.finish()
             return
         request.host = self
@@ -361,7 +361,7 @@ class AIServiceManager(Host):
                         return tool
         return None
     
-    def get_extension(self, extension_id: str) -> NotebookIntelligenceExtension:
+    def get_extension(self, extension_id: str) -> SnuhubIntelligenceExtension:
         for extension in self._extensions:
             if extension.id == extension_id:
                 return extension

@@ -1,9 +1,9 @@
 # Copyright (c) Mehmet Bektas <mbektasgh@outlook.com>
 
-from notebook_intelligence.api import ChatResponse, Toolset
+from snuhub_intelligence.api import ChatResponse, Toolset
 import logging
-import notebook_intelligence.api as nbapi
-from notebook_intelligence.api import BuiltinToolset
+import snuhub_intelligence.api as nbapi
+from snuhub_intelligence.api import BuiltinToolset
 
 log = logging.getLogger(__name__)
 
@@ -13,7 +13,7 @@ async def create_new_notebook(**args) -> str:
     """Creates a new empty notebook.
     """
     response = args["response"]
-    ui_cmd_response = await response.run_ui_command('notebook-intelligence:create-new-notebook-from-py', {'code': ''})
+    ui_cmd_response = await response.run_ui_command('snuhub-intelligence:create-new-notebook-from-py', {'code': ''})
     file_path = ui_cmd_response['path']
 
     return f"Created new notebook at {file_path}"
@@ -26,7 +26,7 @@ async def add_markdown_cell(source: str, **args) -> str:
         source: Markdown source
     """
     response = args["response"]
-    ui_cmd_response = await response.run_ui_command('notebook-intelligence:add-markdown-cell-to-active-notebook', {'source': source})
+    ui_cmd_response = await response.run_ui_command('snuhub-intelligence:add-markdown-cell-to-active-notebook', {'source': source})
 
     return "Added markdown cell to notebook"
 
@@ -38,7 +38,7 @@ async def add_code_cell(source: str, **args) -> str:
         source: Python code source
     """
     response = args["response"]
-    ui_cmd_response = await response.run_ui_command('notebook-intelligence:add-code-cell-to-active-notebook', {'source': source})
+    ui_cmd_response = await response.run_ui_command('snuhub-intelligence:add-code-cell-to-active-notebook', {'source': source})
 
     return "Added code cell to notebook"
 
@@ -48,7 +48,7 @@ async def get_number_of_cells(**args) -> str:
     """Get number of cells for the active notebook.
     """
     response = args["response"]
-    ui_cmd_response = await response.run_ui_command('notebook-intelligence:get-number-of-cells', {})
+    ui_cmd_response = await response.run_ui_command('snuhub-intelligence:get-number-of-cells', {})
 
     return str(ui_cmd_response)
 
@@ -61,7 +61,7 @@ async def get_cell_type_and_source(cell_index: int, **args) -> str:
         cell_index: Zero based cell index
     """
     response = args["response"]
-    ui_cmd_response = await response.run_ui_command('notebook-intelligence:get-cell-type-and-source', {"cellIndex": cell_index })
+    ui_cmd_response = await response.run_ui_command('snuhub-intelligence:get-cell-type-and-source', {"cellIndex": cell_index })
 
     return str(ui_cmd_response)
 
@@ -75,7 +75,7 @@ async def get_cell_output(cell_index: int, **args) -> str:
         cell_index: Zero based cell index
     """
     response = args["response"]
-    ui_cmd_response = await response.run_ui_command('notebook-intelligence:get-cell-output', {"cellIndex": cell_index})
+    ui_cmd_response = await response.run_ui_command('snuhub-intelligence:get-cell-output', {"cellIndex": cell_index})
 
     return str(ui_cmd_response)
 
@@ -90,7 +90,7 @@ async def set_cell_type_and_source(cell_index: int, cell_type: str, source: str,
         source: Markdown or Python code source
     """
     response = args["response"]
-    ui_cmd_response = await response.run_ui_command('notebook-intelligence:set-cell-type-and-source', {"cellIndex": cell_index, "cellType": cell_type, "source": source})
+    ui_cmd_response = await response.run_ui_command('snuhub-intelligence:set-cell-type-and-source', {"cellIndex": cell_index, "cellType": cell_type, "source": source})
 
     return str(ui_cmd_response)
 
@@ -104,7 +104,7 @@ async def delete_cell(cell_index: int, **args) -> str:
     """
     response = args["response"]
 
-    ui_cmd_response = await response.run_ui_command('notebook-intelligence:delete-cell-at-index', {"cellIndex": cell_index})
+    ui_cmd_response = await response.run_ui_command('snuhub-intelligence:delete-cell-at-index', {"cellIndex": cell_index})
 
     return f"Deleted the cell at index: {cell_index}"
 
@@ -119,7 +119,7 @@ async def insert_cell(cell_index: int, cell_type: str, source: str, **args) -> s
         source: Markdown or Python code source
     """
     response = args["response"]
-    ui_cmd_response = await response.run_ui_command('notebook-intelligence:insert-cell-at-index', {"cellIndex": cell_index, "cellType": cell_type, "source": source})
+    ui_cmd_response = await response.run_ui_command('snuhub-intelligence:insert-cell-at-index', {"cellIndex": cell_index, "cellType": cell_type, "source": source})
 
     return str(ui_cmd_response)
 
@@ -133,7 +133,7 @@ async def run_cell(cell_index: int, **args) -> str:
     """
     response = args["response"]
 
-    ui_cmd_response = await response.run_ui_command('notebook-intelligence:run-cell-at-index', {"cellIndex": cell_index})
+    ui_cmd_response = await response.run_ui_command('snuhub-intelligence:run-cell-at-index', {"cellIndex": cell_index})
 
     return f"Ran the cell at index: {cell_index}"
 
@@ -155,7 +155,7 @@ async def create_new_python_file(code: str, **args) -> str:
         code: Python code source
     """
     response = args["response"]
-    ui_cmd_response = await response.run_ui_command('notebook-intelligence:create-new-file', {'code': code})
+    ui_cmd_response = await response.run_ui_command('snuhub-intelligence:create-new-file', {'code': code})
     file_path = ui_cmd_response['path']
 
     return f"Created new Python file at {file_path}"
@@ -166,7 +166,7 @@ async def get_file_content(**args) -> str:
     """Returns the content of the current file.
     """
     response = args["response"]
-    ui_cmd_response = await response.run_ui_command('notebook-intelligence:get-current-file-content', {})
+    ui_cmd_response = await response.run_ui_command('snuhub-intelligence:get-current-file-content', {})
 
     return f"Received the file content"
 
@@ -178,7 +178,7 @@ async def set_file_content(content: str, **args) -> str:
         content: File content
     """
     response = args["response"]
-    ui_cmd_response = await response.run_ui_command('notebook-intelligence:set-current-file-content', {"content": content})
+    ui_cmd_response = await response.run_ui_command('snuhub-intelligence:set-current-file-content', {"content": content})
 
     return f"Set the file content"
 

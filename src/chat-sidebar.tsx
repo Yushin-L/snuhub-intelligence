@@ -557,7 +557,7 @@ function ChatResponse(props: any) {
                     onClick={() => {
                       markFormConfirmed(item.id);
                       runCommand(
-                        'notebook-intelligence:chat-user-input',
+                        'snuhub-intelligence:chat-user-input',
                         item.content.confirmArgs
                       );
                     }}
@@ -571,7 +571,7 @@ function ChatResponse(props: any) {
                     onClick={() => {
                       markFormCanceled(item.id);
                       runCommand(
-                        'notebook-intelligence:chat-user-input',
+                        'snuhub-intelligence:chat-user-input',
                         item.content.cancelArgs
                       );
                     }}
@@ -1149,7 +1149,7 @@ function SidebarComponent(props: any) {
     setShowModeTools(false);
     props
       .getApp()
-      .commands.execute('notebook-intelligence:open-configuration-dialog');
+      .commands.execute('snuhub-intelligence:open-configuration-dialog');
   };
 
   const handleChatToolsButtonClick = async () => {
@@ -1482,14 +1482,14 @@ function SidebarComponent(props: any) {
   const handleConfigurationClick = async () => {
     props
       .getApp()
-      .commands.execute('notebook-intelligence:open-configuration-dialog');
+      .commands.execute('snuhub-intelligence:open-configuration-dialog');
   };
 
   const handleLoginClick = async () => {
     props
       .getApp()
       .commands.execute(
-        'notebook-intelligence:open-github-copilot-login-dialog'
+        'snuhub-intelligence:open-github-copilot-login-dialog'
       );
   };
 
@@ -2249,7 +2249,7 @@ function GitHubCopilotStatusComponent(props: any) {
     props
       .getApp()
       .commands.execute(
-        'notebook-intelligence:open-github-copilot-login-dialog'
+        'snuhub-intelligence:open-github-copilot-login-dialog'
       );
   };
 
@@ -2805,7 +2805,7 @@ function ConfigurationDialogBodyComponent(props: any) {
             <div className="model-config-section-header access-token-config-header">
               GitHub Copilot login{' '}
               <a
-                href="https://github.com/notebook-intelligence/notebook-intelligence/blob/main/README.md#remembering-github-copilot-login"
+                href="https://github.com/Yushin-L/snuhub-intelligence/blob/main/README.md#remembering-github-copilot-login"
                 target="_blank"
               >
                 {' '}

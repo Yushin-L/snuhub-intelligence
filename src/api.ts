@@ -97,7 +97,7 @@ export class NBIAPI {
     const serverSettings = ServerConnection.makeSettings();
     const wsUrl = URLExt.join(
       serverSettings.wsUrl,
-      'notebook-intelligence',
+      'snuhub-intelligence',
       'copilot'
     );
 

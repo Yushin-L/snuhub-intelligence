@@ -19,7 +19,7 @@ export async function requestAPI<T>(
   const settings = ServerConnection.makeSettings();
   const requestUrl = URLExt.join(
     settings.baseUrl,
-    'notebook-intelligence', // API Namespace
+    'snuhub-intelligence', // API Namespace
     endPoint
   );
 

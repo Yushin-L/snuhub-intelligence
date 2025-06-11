@@ -10,7 +10,7 @@ from fuzzy_json import loads as fuzzy_json_loads
 import logging
 from mcp.server.fastmcp.tools import Tool as MCPToolClass
 
-from notebook_intelligence.config import NBIConfig
+from snuhub_intelligence.config import NBIConfig
 
 log = logging.getLogger(__name__)
 
@@ -310,7 +310,7 @@ class Tool:
         raise NotImplemented
 
 class Toolset:
-    def __init__(self, id: str, name: str, description: str, provider: Union['NotebookIntelligenceExtension', None], tools: list[Tool] = [], instructions: str = None):
+    def __init__(self, id: str, name: str, description: str, provider: Union['SnuhubkIntelligenceExtension', None], tools: list[Tool] = [], instructions: str = None):
         self.id = id
         self.name = name
         self.description = description
@@ -776,7 +776,7 @@ class Host:
     def get_extension_tool(self, extension_id: str, toolset_id: str, tool_name: str) -> Tool:
         return NotImplemented
 
-class NotebookIntelligenceExtension:
+class SnuhubIntelligenceExtension:
     @property
     def id(self) -> str:
         raise NotImplemented

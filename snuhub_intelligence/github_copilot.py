@@ -12,16 +12,16 @@ import secrets
 import sseclient
 import datetime as dt
 import logging
-from notebook_intelligence.api import CancelToken, ChatResponse, CompletionContext, MarkdownData
-from notebook_intelligence.util import decrypt_with_password, encrypt_with_password
+from snuhub_intelligence.api import CancelToken, ChatResponse, CompletionContext, MarkdownData
+from snuhub_intelligence.util import decrypt_with_password, encrypt_with_password
 
 from ._version import __version__ as NBI_VERSION
 
 log = logging.getLogger(__name__)
 
-EDITOR_VERSION = f"NotebookIntelligence/{NBI_VERSION}"
-EDITOR_PLUGIN_VERSION = f"NotebookIntelligence/{NBI_VERSION}"
-USER_AGENT = f"NotebookIntelligence/{NBI_VERSION}"
+EDITOR_VERSION = f"SnuhubIntelligence/{NBI_VERSION}"
+EDITOR_PLUGIN_VERSION = f"SnuhubIntelligence/{NBI_VERSION}"
+USER_AGENT = f"SnuhubIntelligence/{NBI_VERSION}"
 CLIENT_ID = "Iv1.b507a08c87ecfe98"
 MACHINE_ID = secrets.token_hex(33)[0:65]
 
@@ -380,7 +380,7 @@ def inline_completions(model_id, prefix, suffix, language, filename, context: Co
                 'top_p': 1,
                 'n': 1,
                 'stop': ['<END>', '```'],
-                'nwo': 'NotebookIntelligence',
+                'nwo': 'SnuhubIntelligence',
                 'stream': True,
                 'extra': {
                     'language': language,
@@ -475,7 +475,7 @@ def completions(model_id, messages, tools = None, response: ChatResponse = None,
             'top_p': 1,
             'n': 1,
             'stop': ['<END>'],
-            'nwo': 'NotebookIntelligence',
+            'nwo': 'SnuhubIntelligence',
             'stream': True
         }
 

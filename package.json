@@ -1,7 +1,7 @@
 {
-    "name": "@notebook-intelligence/notebook-intelligence",
+    "name": "@snuhub-intelligence/snuhub-intelligence",
     "version": "2.2.4",
-    "description": "AI coding assistant for JupyterLab",
+    "description": "AI coding assistant for JupyterLab (forked by notebook-intelligence)",
     "keywords": [
         "AI",
         "notebook",
@@ -10,9 +10,9 @@
         "jupyterlab",
         "jupyterlab-extension"
     ],
-    "homepage": "https://github.com/notebook-intelligence/notebook-intelligence",
+    "homepage": "https://github.com/Yushin-L/snuhub-intelligence",
     "bugs": {
-        "url": "https://github.com/notebook-intelligence/notebook-intelligence/issues"
+        "url": "https://github.com/Yushin-L/snuhub-intelligence/issues"
     },
     "license": "GPL-3.0",
     "author": {
@@ -30,7 +30,7 @@
     "style": "style/index.css",
     "repository": {
         "type": "git",
-        "url": "https://github.com/notebook-intelligence/notebook-intelligence.git"
+        "url": "https://github.com/Yushin-L/snuhub-intelligence.git"
     },
     "scripts": {
         "build": "jlpm build:lib && jlpm build:labextension:dev",
@@ -42,7 +42,7 @@
         "clean": "jlpm clean:lib",
         "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
         "clean:lintcache": "rimraf .eslintcache .stylelintcache",
-        "clean:labextension": "rimraf notebook_intelligence/labextension notebook_intelligence/_version.py",
+        "clean:labextension": "rimraf snuhub_intelligence/labextension snuhub_intelligence/_version.py",
         "clean:all": "jlpm clean:lib && jlpm clean:labextension && jlpm clean:lintcache",
         "eslint": "jlpm eslint:check --fix",
         "eslint:check": "eslint . --cache --ext .ts,.tsx",
@@ -116,16 +116,16 @@
                     "pip"
                 ],
                 "base": {
-                    "name": "notebook_intelligence"
+                    "name": "snuhub_intelligence"
                 }
             }
         },
         "extension": true,
-        "outputDir": "notebook_intelligence/labextension",
+        "outputDir": "snuhub_intelligence/labextension",
         "schemaDir": "schema",
         "webpackConfig": "./webpack.config.js",
         "sharedPackages": {
-            "@notebook-intelligence/notebook-intelligence": {
+            "@snuhub-intelligence/snuhub-intelligence": {
                 "singleton": true
             }
         }

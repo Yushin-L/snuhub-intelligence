@@ -19,10 +19,10 @@ from jupyter_server.utils import url_path_join
 import tornado
 from tornado import websocket
 from traitlets import Unicode
-from notebook_intelligence.api import BuiltinToolset, CancelToken, ChatMode, ChatResponse, ChatRequest, ContextRequest, ContextRequestType, RequestDataType, RequestToolSelection, ResponseStreamData, ResponseStreamDataType, BackendMessageType, SignalImpl
-from notebook_intelligence.ai_service_manager import AIServiceManager
-import notebook_intelligence.github_copilot as github_copilot
-from notebook_intelligence.built_in_toolsets import built_in_toolsets
+from snuhub_intelligence.api import BuiltinToolset, CancelToken, ChatMode, ChatResponse, ChatRequest, ContextRequest, ContextRequestType, RequestDataType, RequestToolSelection, ResponseStreamData, ResponseStreamDataType, BackendMessageType, SignalImpl
+from snuhub_intelligence.ai_service_manager import AIServiceManager
+import snuhub_intelligence.github_copilot as github_copilot
+from snuhub_intelligence.built_in_toolsets import built_in_toolsets
 
 ai_service_manager: AIServiceManager = None
 log = logging.getLogger(__name__)
@@ -450,7 +450,7 @@ class WebsocketCopilotHandler(websocket.WebSocketHandler):
 
             for context in additionalContext:
                 file_path = context["filePath"]
-                file_path = path.join(NotebookIntelligence.root_dir, file_path)
+                file_path = path.join(SnuhubIntelligence.root_dir, file_path)
                 filename = path.basename(file_path)
                 start_line = context["startLine"]
                 end_line = context["endLine"]
@@ -551,9 +551,9 @@ class WebsocketCopilotHandler(websocket.WebSocketHandler):
         response_emitter.stream({"completions": completions})
         response_emitter.finish()
 
-class NotebookIntelligence(ExtensionApp):
-    name = "notebook_intelligence"
-    default_url = "/notebook-intelligence"
+class SnuhubIntelligence(ExtensionApp):
+    name = "snuhub_intelligence"
+    default_url = "/snuhub-intelligence"
     load_other_extensions = True
     file_url_prefix = "/render"
 
@@ -580,7 +580,7 @@ class NotebookIntelligence(ExtensionApp):
         pass
 
     def initialize_handlers(self):
-        NotebookIntelligence.root_dir = self.serverapp.root_dir
+        SnuhubIntelligence.root_dir = self.serverapp.root_dir
         server_root_dir = os.path.expanduser(self.serverapp.web_app.settings["server_root_dir"])
         self.initialize_ai_service(server_root_dir)
         self._setup_handlers(self.serverapp.web_app)
@@ -601,16 +601,16 @@ class NotebookIntelligence(ExtensionApp):
         host_pattern = ".*$"
 
         base_url = web_app.settings["base_url"]
-        route_pattern_capabilities = url_path_join(base_url, "notebook-intelligence", "capabilities")
-        route_pattern_config = url_path_join(base_url, "notebook-intelligence", "config")
-        route_pattern_update_provider_models = url_path_join(base_url, "notebook-intelligence", "update-provider-models")
-        route_pattern_emit_telemetry_event = url_path_join(base_url, "notebook-intelligence", "emit-telemetry-event")
-        route_pattern_github_login_status = url_path_join(base_url, "notebook-intelligence", "gh-login-status")
-        route_pattern_github_login = url_path_join(base_url, "notebook-intelligence", "gh-login")
-        route_pattern_github_logout = url_path_join(base_url, "notebook-intelligence", "gh-logout")
-        route_pattern_copilot = url_path_join(base_url, "notebook-intelligence", "copilot")
+        route_pattern_capabilities = url_path_join(base_url, "snuhub-intelligence", "capabilities")
+        route_pattern_config = url_path_join(base_url, "snuhub-intelligence", "config")
+        route_pattern_update_provider_models = url_path_join(base_url, "snuhub-intelligence", "update-provider-models")
+        route_pattern_emit_telemetry_event = url_path_join(base_url, "snuhub-intelligence", "emit-telemetry-event")
+        route_pattern_github_login_status = url_path_join(base_url, "snuhub-intelligence", "gh-login-status")
+        route_pattern_github_login = url_path_join(base_url, "snuhub-intelligence", "gh-login")
+        route_pattern_github_logout = url_path_join(base_url, "snuhub-intelligence", "gh-logout")
+        route_pattern_copilot = url_path_join(base_url, "snuhub-intelligence", "copilot")
         GetCapabilitiesHandler.notebook_execute_tool = self.notebook_execute_tool
-        NotebookIntelligence.handlers = [
+        SnuhubIntelligence.handlers = [
             (route_pattern_capabilities, GetCapabilitiesHandler),
             (route_pattern_config, ConfigHandler),
             (route_pattern_update_provider_models, UpdateProviderModelsHandler),
@@ -620,4 +620,4 @@ class NotebookIntelligence(ExtensionApp):
             (route_pattern_github_logout, GetGitHubLogoutHandler),
             (route_pattern_copilot, WebsocketCopilotHandler),
         ]
-        web_app.add_handlers(host_pattern, NotebookIntelligence.handlers)
+        web_app.add_handlers(host_pattern, SnuhubIntelligence.handlers)

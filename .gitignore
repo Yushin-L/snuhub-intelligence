@@ -7,9 +7,9 @@ node_modules/
 *.egg-info/
 .ipynb_checkpoints
 *.tsbuildinfo
-notebook_intelligence/labextension
+snuhub_intelligence/labextension
 # Version file is handled by hatchling
-notebook_intelligence/_version.py
+snuhub_intelligence/_version.py
 
 # Created by https://www.gitignore.io/api/python
 # Edit at https://www.gitignore.io/?templates=python

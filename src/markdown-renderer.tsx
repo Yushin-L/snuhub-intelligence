@@ -48,21 +48,21 @@ export function MarkdownRenderer({
           };
 
           const handleInsertAtCursorClick = () => {
-            app.commands.execute('notebook-intelligence:insert-at-cursor', {
+            app.commands.execute('snuhub-intelligence:insert-at-cursor', {
               language,
               code: codeString
             });
           };
 
           const handleAddCodeAsNewCell = () => {
-            app.commands.execute('notebook-intelligence:add-code-as-new-cell', {
+            app.commands.execute('snuhub-intelligence:add-code-as-new-cell', {
               language,
               code: codeString
             });
           };
 
           const handleCreateNewFileClick = () => {
-            app.commands.execute('notebook-intelligence:create-new-file', {
+            app.commands.execute('snuhub-intelligence:create-new-file', {
               language,
               code: codeString
             });
@@ -70,7 +70,7 @@ export function MarkdownRenderer({
 
           const handleCreateNewNotebookClick = () => {
             app.commands.execute(
-              'notebook-intelligence:create-new-notebook-from-py',
+              'snuhub-intelligence:create-new-notebook-from-py',
               { language, code: codeString }
             );
           };

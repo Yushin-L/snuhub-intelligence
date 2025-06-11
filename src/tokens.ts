@@ -119,12 +119,12 @@ export interface ITelemetryEmitter {
   emitTelemetryEvent(event: ITelemetryEvent): void;
 }
 
-export const INotebookIntelligence = new Token<INotebookIntelligence>(
-  '@notebook-intelligence/notebook-intelligence:INotebookIntelligence',
+export const ISnuhubIntelligence = new Token<ISnuhubIntelligence>(
+  '@snuhub-intelligence/snuhub-intelligence:ISnuhubIntelligence',
   'AI coding assistant for JupyterLab.'
 );
 
-export interface INotebookIntelligence {
+export interface ISnuhubIntelligence {
   registerTelemetryListener: (listener: ITelemetryListener) => void;
   unregisterTelemetryListener: (listener: ITelemetryListener) => void;
 }

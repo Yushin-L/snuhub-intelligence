@@ -3,8 +3,8 @@
 from typing import Any
 
 import requests
-from notebook_intelligence.api import ChatModel, EmbeddingModel, InlineCompletionModel, LLMProvider, CancelToken, ChatResponse, CompletionContext
-from notebook_intelligence.github_copilot import generate_copilot_headers, completions, inline_completions
+from snuhub_intelligence.api import ChatModel, EmbeddingModel, InlineCompletionModel, LLMProvider, CancelToken, ChatResponse, CompletionContext
+from snuhub_intelligence.github_copilot import generate_copilot_headers, completions, inline_completions
 import logging
 
 log = logging.getLogger(__name__)
